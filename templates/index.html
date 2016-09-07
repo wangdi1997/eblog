@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Wangdi's Blog</title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.2.3/showdown.min.js"></script>
+    <script>
+        function heredoc(fn) {
+            return fn.toString().split('\n').slice(1,-1).join('\n') + '  \n'
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <h3 class="text-center">
+                Wangdi's Blog
+            </h3>
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#">首页</a>
+                </li>
+                <li class="disabled">
+                    <a href="#">简介</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {% for article in articleSet %}
+    <h2>
+        {{ article.title }}
+    </h2>
+
+    <p id="content-{{ article.id }}">
+    </p>
+    <p>
+        <a  href="./article/{{ article.id }}">View details »</a>
+        <a style="float:right">{{ article.time }}</a>
+    </p>
+    <hr />
+<script>
+var converter = new showdown.Converter();
+var text = heredoc(function(){/*
+{{ article.content }}
+*/});
+html      = converter.makeHtml(text);
+$("#content-{{ article.id }}").html(html);
+</script>
+    {% endfor %}
+</div>
+</body>
+</html>
