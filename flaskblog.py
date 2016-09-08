@@ -117,6 +117,16 @@ def editArticle():
     else:
         return render_template('login.html')
 
+@app.route('/admin/editArticle/<int:articleId>', methods=['GET','POST'])
+def editArticleH():
+    pass
+
+
+@app.route('/admin/deleteArticle/<int:articleId>', methods=['POST'])
+def deleteArticle():
+    pass
+
+
 
 if __name__ == '__main__':
     app.run()
