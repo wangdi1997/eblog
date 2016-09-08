@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <style>
+        .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -22,19 +27,33 @@
                 <li>
                     <a href="#">添加文章</a>
                 </li>
-                <li   class="active">
+                <li class="active">
                     <a href="#">修改文章</a>
                 </li>
             </ul>
-            <form role="form" action="./admin/addArticle" method="post">
-                <div class="form-group">
-                    <label>标题</label><input type="text" class="form-control" name="title"/>
-                </div>
-                <div class="form-group">
-                    <label>内容</label><textarea name="content" class="form-control" rows="30"></textarea>
-                </div>
-                 <button type="submit" class="btn btn-success" style="float:right">Submit</button>
-            </form>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>标题</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for article in articleSet %}
+                <tr>
+                    <td>{{ article.id }}</td>
+                    <td>{{ article.title }}</td>
+                    <td>{{ article.time }}</td>
+                    <td>
+                        <button type="button" class="btn btn-success">修改</button>
+                        <button type="button" class="btn btn-warning">删除</button>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

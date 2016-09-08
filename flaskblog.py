@@ -106,6 +106,17 @@ def upload():
 def testupload():
     return render_template('testupload.html')
 
+@app.route('/admin/editArticle', methods=['GET','POST'])
+def editArticle():
+    if session.get('logged_in'):
+        if request.method == 'POST':
+            pass
+        else:
+            articleSet = Article.query.filter().all()
+            return render_template('articleEdit.html',articleSet=articleSet)
+    else:
+        return render_template('login.html')
+
 
 if __name__ == '__main__':
     app.run()
