@@ -118,13 +118,34 @@ def editArticle():
         return render_template('login.html')
 
 @app.route('/admin/editArticle/<int:articleId>', methods=['GET','POST'])
-def editArticleH():
-    pass
+def editArticleH(articleId):
+    if request.method == 'GET' and session.get['logged_in']:
+        articleSet = Article.query.filter(Article.id == articleId).first()
+        return render_template('articleEditH.html', articleSet=articleSet)
+    elif request.method == 'POST' and session.get['logged_in']:
+        delArticle = Article.query.filter(Article.id == articleId).first()
+        rTitle = request.form['title']
+        rContent = request.form['content']
+        tmpTime = time.strftime('%Y-%m-%d %H-%M', time.localtime(time.time()))
+        addArticle = Article(articleId,rTitle,rContent,tmpTime)
+        db.session.delete(delArticle)
+        db.session.add(addArticle)
+        db.session.commit()
+        return render_template('articleEditH.html', articleSet=addArticle)
+    else:
+        return render_template('login.html')
 
 
-@app.route('/admin/deleteArticle/<int:articleId>', methods=['POST'])
-def deleteArticle():
-    pass
+@app.route('/admin/deleteArticle/<int:articleId>', methods=['GET'])
+def deleteArticleH(articleId):
+    if session.get['logged_in']:
+        delArticle = Article.query.filter(Article.id == articleId).first()
+        db.session.delete(delArticle)
+        db.session.commit()
+        articleSet = Article.query.filter().all()
+        return render_template('articleEdit.html', articleSet=articleSet)
+    else:
+        return render_template('login.html')
 
 
 
