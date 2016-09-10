@@ -19,19 +19,19 @@
                 <li class="disabled">
                     <a href="#">仪表盘</a>
                 </li>
-                <li>
-                    <a href="#">添加文章</a>
+                <li   class="active">
+                    <a href="./admin">添加文章</a>
                 </li>
-                <li  class="active">
-                    <a href="{{ url_for('editArticle') }}">修改文章</a>
+                <li>
+                    <a href="./admin/editArticle">修改文章</a>
                 </li>
             </ul>
-            <form role="form" action="./admin/editArticle/{{ articleSet.id }}" method="post">
+            <form role="form" action="./admin/addArticle" method="post">
                 <div class="form-group">
-                    <label>标题</label><input type="text" class="form-control" name="title" value="{{ articleSet.title }}"/>
+                    <label>标题</label><input type="text" class="form-control" name="title"/>
                 </div>
                 <div class="form-group">
-                    <label>内容</label><textarea name="content" class="form-control" rows="30">{{ articleSet.content }}</textarea>
+                    <label>内容</label><textarea name="content" class="form-control" rows="30"></textarea>
                 </div>
                  <button type="submit" class="btn btn-success" style="float:right">Submit</button>
             </form>

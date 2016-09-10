@@ -25,7 +25,7 @@
                     <a href="#">仪表盘</a>
                 </li>
                 <li>
-                    <a href="#">添加文章</a>
+                    <a href="{{ url_for('login') }}">添加文章</a>
                 </li>
                 <li class="active">
                     <a href="#">修改文章</a>
@@ -47,8 +47,8 @@
                     <td>{{ article.title }}</td>
                     <td>{{ article.time }}</td>
                     <td>
-                        <button type="button" class="btn btn-success">修改</button>
-                        <button type="button" class="btn btn-warning">删除</button>
+                        <a href="{{ url_for('editArticleH',articleId=article.id) }}"><button type="button" class="btn btn-success">修改</button></a>
+                        <a href="{{ url_for('deleteArticleH',articleId=article.id) }}"><button type="button" class="btn btn-warning">删除</button></a>
                     </td>
                 </tr>
                 {% endfor %}

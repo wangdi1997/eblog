@@ -31,12 +31,12 @@
                     <a href="#">修改文章</a>
                 </li>
             </ul>
-            <form role="form" action="./admin/addArticle" method="post">
+            <form role="form" action="{{ url_for('editArticleH',articleId=articleSet.id) }}" method="post">
                 <div class="form-group">
-                    <label>标题</label><input type="text" class="form-control" name="title"/>
+                    <label>标题</label><input type="text" class="form-control" name="title" value="{{ articleSet.title }}"/>
                 </div>
                 <div class="form-group">
-                    <label>内容</label><textarea name="content" class="form-control" rows="30"></textarea>
+                    <label>内容</label><textarea name="content" class="form-control" rows="30">{{ articleSet.content }}</textarea>
                 </div>
                  <button type="submit" class="btn btn-success" style="float:right">Submit</button>
             </form>
