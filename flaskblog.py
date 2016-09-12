@@ -93,11 +93,11 @@ def upload():
         if file and allowed_file(file.filename):
             ttmp = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
             filename = ttmp + secure_filename(file.filename)
-            turl = 'http://www.bangnicool.com/image/' + filename
+            turl = './image/' + filename
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             success = '上传成功---'
             success = success.decode('utf8')
-            return '<textarea>success</textarea>'
+            return '<textarea>'+turl+'</textarea>'
         return '<textarea>fail</textarea>'
     else:
         return render_template('index.html')
